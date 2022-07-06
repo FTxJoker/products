@@ -1,19 +1,15 @@
 import os
 
 
-#  檢查檔案 & 讀取檔案
-def read_file(filename):
+#  讀取檔案
+def read_file(_):
     products = []
-    if os.path.isfile(filename):
-        print('找到檔案了!')
-        with open(filename, 'r', encoding='utf-8') as f:
-            for line in f:
-                if '商品,價格' in line:
-                    continue
-                name, price = line.strip().split(',')
-                products.append([name, price])
-    else:
-        print('檔案不存在!')
+    with open(_, 'r', encoding='utf-8') as f:
+        for line in f:
+            if '商品,價格' in line:
+                continue
+            name, price = line.strip().split(',')
+            products.append([name, price])
     return products
 
 
@@ -36,14 +32,23 @@ def print_products(products):
 
 
 #  寫入檔案
-def write_file(filename, products):
-    with open(filename, 'w', encoding='utf-8') as f:
+def write_file(_, products):
+    with open(_, 'w', encoding='utf-8') as f:
         f.write('商品,價格\n')
         for _ in products:
-            f.write(_[0] + ',' + _[1] + '\n')
+            f.write(_[0] + ',' + str(_[1]) + '\n')
 
 
-products = read_file('products.csv')
-products = user_input(products)
-print_products(products)
-write_file('products.csv', products)
+def main(_):
+    if os.path.isfile(_):
+        print('找到檔案了!')
+        products = read_file(_)
+    else:
+        print('檔案不存在!')
+
+    products = user_input(products)
+    print_products(products)
+    write_file(_, products)
+
+
+main('products.csv')
