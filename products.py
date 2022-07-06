@@ -10,6 +10,7 @@ print(products)
 for _ in products:
     print(_[0], '的價格是', _[1])
 
-with open('products.csv', 'w') as f:
+with open('products.csv', 'w', encoding='utf-8') as f:
+    f.write('商品,價格\n')
     for _ in products:
         f.write(_[0] + ',' + _[1] + '\n')
