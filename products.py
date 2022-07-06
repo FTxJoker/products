@@ -40,6 +40,7 @@ def write_file(_, products):
 
 
 def main(_):
+    products = []
     if os.path.isfile(_):
         print('找到檔案了!')
         products = read_file(_)
@@ -51,4 +52,5 @@ def main(_):
     write_file(_, products)
 
 
-main('products.csv')
+if __name__ == '__main__':
+    main('products.csv')
